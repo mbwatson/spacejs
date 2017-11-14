@@ -8,6 +8,10 @@ class Bullet {
 		this.dy = this.speed * sin(angle);
 		this.alpha = 255;
 		this.r = 4;
+		this.minx = 1;
+		this.maxx = width - 1;
+		this.miny = 1;
+		this.maxy = height - 1;
 	}
 	draw() {
 		noStroke();
@@ -19,6 +23,10 @@ class Bullet {
 		this.y += this.dy;
 		this.alpha -= 5;
 	}
+	offTopEdge() { return(this.y + this.dy <= MINY && this.dy < 0); }
+	offBottomEdge() { return(this.y + this.dy >= MAXY && this.dy > 0); }
+	offLeftEdge() { return(this.x + this.dx <= MINX && this.dx < 0); }
+	offRightEdge() { return(this.x + this.dx >= MAXX && this.dx > 0); }
 }
 
 class Bullets extends Array {

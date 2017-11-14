@@ -13,6 +13,10 @@ class Ship {
 		this.shotDelay = 200; // in milliseconds
 		this.bullets = new Bullets();
 		this.exhaust = new Exhaust();
+		// this.minx = 5;
+		// this.maxx = width - 5;
+		// this.miny = 5;
+		// this.maxy = height - 5;
 	}
 	shipShape() {
 
@@ -57,6 +61,10 @@ class Ship {
 		this.bullets.draw();
 		this.exhaust.draw();
 	}
+	offTopEdge() { return(this.y + this.dy <= MINY && this.dy < 0); }
+	offBottomEdge() { return(this.y + this.dy >= MAXY && this.dy > 0); }
+	offLeftEdge() { return(this.x + this.dx <= MINX && this.dx < 0); }
+	offRightEdge() { return(this.x + this.dx >= MAXX && this.dx > 0); }
 	speed() {
 		return(sqrt(this.dx**2 + this.dy**2));
 	}
