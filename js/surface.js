@@ -4,12 +4,12 @@ class Surface {
 		this.bottom = y2;
 		this.left = x1;
 		this.right = x2;
-		this.bgColor = color(0, 0, 63)
+		this.bgColor = color(0, 0, 10)
 		this.borderColor = color(0, 0, 0);
 	}
 
 	decorate() {
-		background(space.surface.bgColor);
+		background(this.bgColor);
 	}
 }
 
@@ -39,7 +39,7 @@ class Torus extends Surface {
 		rectMode(CENTER);
 		text("Torus", x, y - s/2 - 10);
 		noFill();
-		stroke(0);
+		stroke(127);
 		rect(x, y, s, s);
 		arrow(x-s/2, y, 'up');
 		arrow(x+s/2, y, 'up');
@@ -84,7 +84,7 @@ class ProjectivePlane extends Surface {
 		rectMode(CENTER);
 		text("Projective Plane", x, y - s/2 - 10);
 		noFill();
-		stroke(0);
+		stroke(127);
 		rect(x, y, s, s);
 		arrow(x-s/2, y, 'up');
 		arrow(x+s/2, y, 'down');
@@ -103,6 +103,7 @@ class KleinBottle extends Surface {
 		object.x = MAXX - object.x;
 		object.y = MAXY;
 		object.dx *= -1;
+		object.angle += PI;
 		return(object);
 	}
 	bottomEdge(object) {
@@ -123,12 +124,12 @@ class KleinBottle extends Surface {
 		noStroke();
 		textAlign(CENTER);
 		rectMode(CENTER);
-		text("Projective Plane", x, y - s/2 - 10);
+		text("Klein Bottle", x, y - s/2 - 10);
 		noFill();
-		stroke(0);
+		stroke(127);
 		rect(x, y, s, s);
 		arrow(x-s/2, y, 'up');
-		arrow(x+s/2, y, 'down');
+		arrow(x+s/2, y, 'up');
 		arrow(x-4, y-s/2, 'right');
 		arrow(x+4, y-s/2, 'right');
 		arrow(x-4, y+s/2, 'left');
@@ -165,7 +166,7 @@ function arrow(a, b, dir) {
 			break;
 	}
 
-	fill(0);
+	fill(127);
 	beginShape();
 	for (let i = 0; i < vertices.length; i++) {
 		vertex(vertices[i].x, vertices[i].y);

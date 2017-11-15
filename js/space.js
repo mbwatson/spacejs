@@ -1,6 +1,6 @@
 class Space {
 	constructor(x1, y1, x2, y2) {
-		this.surface = new ProjectivePlane(x1, y1, x2, y2);
+		this.surface = new Torus(x1, y1, x2, y2);
 	}
 	update() {
 		// ship
@@ -18,6 +18,7 @@ class Space {
 		this.ship.update();
 	}
 	draw() {
+		this.surface.decorate();
 		this.ship.draw();
 	}
 }

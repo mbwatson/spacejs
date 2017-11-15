@@ -5,10 +5,10 @@ class Exhaust {
 	update() {
 		for (let i = this.particles.length-1; i >= 0; i--) {
 			if (this.particles[i].alpha > 0) {
-				this.particles[i].x -= this.particles[i].dx;
-				this.particles[i].y -= this.particles[i].dy;
-				this.particles[i].alpha -= 10;
-				this.particles[i].r -= 0.5;
+				this.particles[i].x -= this.particles[i].dx + random();
+				this.particles[i].y -= this.particles[i].dy + random();
+				this.particles[i].alpha -= 20*random();
+				this.particles[i].r -= random();
 			} else {
 				this.particles.splice(i, 1);
 			}

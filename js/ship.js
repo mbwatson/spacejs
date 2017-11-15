@@ -10,7 +10,7 @@ class Ship {
 		this.thrustAcceleration = 0.002;
 		this.fireAcceleration = 0.0015;
 		this.lastShot = 0;
-		this.shotDelay = 200; // in milliseconds
+		this.shotDelay = 150; // in milliseconds
 		this.bullets = new Bullets();
 		this.exhaust = new Exhaust();
 		// this.minx = 5;
@@ -38,7 +38,8 @@ class Ship {
 			this.ddx += -this.fireAcceleration * cos(this.angle);
 			this.ddy += -this.fireAcceleration * sin(this.angle);
 			if (this.millisSinceLastShot() > this.shotDelay) {
-				this.bullets.push(new Bullet(this.x + 10*cos(this.angle), this.y + 10*sin(this.angle), this.angle));
+				let speed = sqrt(this.dx**2 + this.dy**2);
+				this.bullets.push(new Bullet(this.x, this.y, speed, this.angle));
 				this.lastShot = millis();
 			}
 		}
