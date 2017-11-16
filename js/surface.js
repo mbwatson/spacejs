@@ -50,51 +50,6 @@ class Torus extends Surface {
 	}
 }
 
-class ProjectivePlane extends Surface {
-	constructor(x1, y1, x2, y2) {
-		super(x1, y1, x2, y2);
-	}
-	topEdge(object) {
-		object.x = MAXX - object.x;
-		object.y = MAXY;
-		object.dx *= -1;
-		return(object);
-	}
-	bottomEdge(object) {
-		object.x = MAXX - object.x;
-		object.y = MINY;
-		object.dx *= -1;
-		return(object);
-	}
-	leftEdge(object) {
-		object.x = MAXX;
-		object.y = MAXY - object.y;
-		object.dy *= -1;
-		return(object);
-	}
-	rightEdge(object) {
-		object.x = MINX;
-		object.y = MAXY - object.y;
-		object.dy *= -1;
-		return(object);
-	}
-	draw(x, y, s = 80) {
-		noStroke();
-		textAlign(CENTER);
-		rectMode(CENTER);
-		text("Projective Plane", x, y - s/2 - 10);
-		noFill();
-		stroke(127);
-		rect(x, y, s, s);
-		arrow(x-s/2, y, 'up');
-		arrow(x+s/2, y, 'down');
-		arrow(x-4, y-s/2, 'right');
-		arrow(x+4, y-s/2, 'right');
-		arrow(x-4, y+s/2, 'left');
-		arrow(x+4, y+s/2, 'left');
-	}
-}
-
 class KleinBottle extends Surface {
 	constructor(x1, y1, x2, y2) {
 		super(x1, y1, x2, y2);
@@ -103,13 +58,14 @@ class KleinBottle extends Surface {
 		object.x = MAXX - object.x;
 		object.y = MAXY;
 		object.dx *= -1;
-		object.angle += PI;
+		object.angle = PI - object.angle;
 		return(object);
 	}
 	bottomEdge(object) {
 		object.x = MAXX - object.x;
 		object.y = MINY;
 		object.dx *= -1;
+		object.angle = PI - object.angle;
 		return(object);
 	}
 	leftEdge(object) {
@@ -130,6 +86,55 @@ class KleinBottle extends Surface {
 		rect(x, y, s, s);
 		arrow(x-s/2, y, 'up');
 		arrow(x+s/2, y, 'up');
+		arrow(x-4, y-s/2, 'right');
+		arrow(x+4, y-s/2, 'right');
+		arrow(x-4, y+s/2, 'left');
+		arrow(x+4, y+s/2, 'left');
+	}
+}
+
+class ProjectivePlane extends Surface {
+	constructor(x1, y1, x2, y2) {
+		super(x1, y1, x2, y2);
+	}
+	topEdge(object) {
+		object.x = MAXX - object.x;
+		object.y = MAXY;
+		object.dx *= -1;
+		object.angle = PI - object.angle;
+		return(object);
+	}
+	bottomEdge(object) {
+		object.x = MAXX - object.x;
+		object.y = MINY;
+		object.dx *= -1;
+		object.angle = PI - object.angle;
+		return(object);
+	}
+	leftEdge(object) {
+		object.x = MAXX;
+		object.y = MAXY - object.y;
+		object.dy *= -1;
+		object.angle = -object.angle;
+		return(object);
+	}
+	rightEdge(object) {
+		object.x = MINX;
+		object.y = MAXY - object.y;
+		object.dy *= -1;
+		object.angle = -object.angle;
+		return(object);
+	}
+	draw(x, y, s = 80) {
+		noStroke();
+		textAlign(CENTER);
+		rectMode(CENTER);
+		text("Projective Plane", x, y - s/2 - 10);
+		noFill();
+		stroke(127);
+		rect(x, y, s, s);
+		arrow(x-s/2, y, 'up');
+		arrow(x+s/2, y, 'down');
 		arrow(x-4, y-s/2, 'right');
 		arrow(x+4, y-s/2, 'right');
 		arrow(x-4, y+s/2, 'left');

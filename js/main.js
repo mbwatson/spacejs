@@ -1,59 +1,64 @@
-let paused = false;
-let space;
 const MINX = 0;
 const MINY = 0;
 let MAXX;
 let MAXY;
-let hud = true;
+let game;
 
 function setup() {
 	MAXX = windowWidth;
 	MAXY = windowHeight;
 	createCanvas(MAXX, MAXY);
-	space = new Space(0, 0, width, height);
-	space.ship = new Ship(width/2, height/2);
+	game = new Game();
+	game.space = new Space(0, 0, width, height);
+	game.space.ship = new Ship(width/2, height/2);
 }
 
 function draw() {
-	background(0);
-	if (!paused) {
-		space.update();
-	}
-	space.draw();
-	if (hud === true) {
-		showHUD();
+	switch(game.state) {
+		case 0: // welcome screen
+			game.space.surface.decorate();
+			game.showWelcomeScreen();
+			break;
+		case 1: // playing
+			// draw
+			game.space.surface.decorate();
+			if (game.visibleHUD) { game.showHUD(); }
+			game.space.ship.draw();
+			if (game.paused === true) {
+				game.showPauseScreen();
+			} else {
+				game.space.update();
+			}
+			break;
+		case 2: // game over
+			// this.space.gameOverScreen();
+			break;
+		default:
+			break;
 	}
 }
 
 function keyPressed() {
-	if (key == 'Q') {
-		paused = !paused;
+	// If on welcome screen
+	if (game.state == 0) {
+		// start game
+		game.state = 1;
+	} else {
+		// (Un)pause
+		if (keyCode === ESCAPE) {
+			game.paused = !game.paused;
+		}
+	  // game control
+		if (key == 'H') { game.visibleHUD = !game.visibleHUD; }
+		if (key == 'R') {  }
+		  // surface change
+		if (key == 'T') { game.space.surface = new Torus(0, 0, width, height); }
+		if (key == 'K') { game.space.surface = new KleinBottle(0, 0, width, height); }
+		if (key == 'P') { game.space.surface = new ProjectivePlane(0, 0, width, height); }
 	}
-	if (key == 'T') { space.surface = new Torus(0, 0, width, height); }
-	if (key == 'K') { space.surface = new KleinBottle(0, 0, width, height); }
-	if (key == 'P') { space.surface = new ProjectivePlane(0, 0, width, height); }
-	if (key == 'H') { hud = !hud; }
 }
 
-function showHUD() {
-	textSize(12);
-	fill(255);
-	noStroke();
-	textAlign(LEFT);
-	let shipInfo = `SHIP
-Position: (${approx(space.ship.x, 2)},${approx(space.ship.y, 2)})
-Velocity: (${approx(space.ship.dx, 2)},${approx(space.ship.dy, 2)})`;
-	text(shipInfo, 10, height - 40);
-	text(`BULLETS`, 10, 20);
-	if (space.ship.bullets.length > 0) {
-		for (let i = 0; i < space.ship.bullets.length; i++) {
-			text(`${i+1}: (${approx(space.ship.bullets[i].x, 2)},${approx(space.ship.bullets[i].y, 2)})`, 10, 30+10*i);
-		}
-	} else {
-		text(`None`, 10, 30);
-	}
-	space.surface.draw(width-60, height-40, 60);
-}
+// Misc functions
 
 function approx(val, n) {
 	return val.toFixed(n);
