@@ -4,8 +4,7 @@
 
 This is a template for a spaceship game that can be played on various, user-chosen two-manifolds, including a torus, projective plan, and Klein Bottle.
 
-The direction this will go has not been decided upon.
-I just wanted to get the basics done so it's ready to go when the time comes. This is the typical type of game I write as I learn a new language or new library, which&mdash;right now&mdash; is p5.js. Writing this kind of game opens the door to the nuances of all the most-used features. In addition, it's just good fun.
+The direction in which this project will go has not been decided upon, so this will serve as a template for many different paths this may take.
 
 [Play!](https://mbwatson.github.io/spacejs)
 
