@@ -30,11 +30,11 @@ class Bullet {
 
 class Bullets extends Array {
 	update() {
-		for (let i = this.length - 1; i >= 0; i--) {
-			if (this[i].alpha <= 0) {
+		for (var bullet of this) {
+			if (bullet.alpha <= 0) {
 				this.splice(i,1);
 			} else {
-				this[i].update();
+				bullet.update();
 			}
 		}
 	}
