@@ -22,6 +22,7 @@ class Bullet {
 		this.y += this.dy;
 		this.alpha -= 5;
 	}
+	isDead() {return this.alpha <= 0; }
 	offTopEdge() { return(this.y + this.dy <= MINY && this.dy < 0); }
 	offBottomEdge() { return(this.y + this.dy >= MAXY && this.dy > 0); }
 	offLeftEdge() { return(this.x + this.dx <= MINX && this.dx < 0); }
@@ -30,11 +31,11 @@ class Bullet {
 
 class Bullets extends Array {
 	update() {
-		for (var bullet of this) {
-			if (bullet.alpha <= 0) {
+		for (let i = this.length - 1; i >= 0; i--) {
+			if (this[i].alpha <= 0) {
 				this.splice(i,1);
 			} else {
-				bullet.update();
+				this[i].update();
 			}
 		}
 	}
