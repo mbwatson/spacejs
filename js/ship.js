@@ -7,26 +7,23 @@ class Ship {
 		this.ddx = 0;
 		this.ddy = 0;
 		this.angle = -PI/2;
-		this.thrustAcceleration = 0.002;
-		this.fireAcceleration = 0.0015;
+		this.dangle = 0.075;
+		this.thrustAcceleration = 0.0010;
+		this.fireAcceleration = 0.0010;
 		this.lastShot = 0;
 		this.shotDelay = 150; // in milliseconds
 		this.bullets = new Bullets();
 		this.exhaust = new Exhaust();
-		// this.minx = 5;
-		// this.maxx = width - 5;
-		// this.miny = 5;
-		// this.maxy = height - 5;
 	}
-	shipShape() {
-
+	speed() {
+		return(sqrt(this.dx**2 + this.dy**2));
 	}
 	update() {
 		if (keyIsDown(LEFT_ARROW)) {
-			this.angle -= 0.1;
+			this.angle -= this.dangle;
 		}
 		if (keyIsDown(RIGHT_ARROW)) {
-			this.angle += 0.1;
+			this.angle += this.dangle;
 		}
 		if (keyIsDown(UP_ARROW)) {
 			this.thrust();
