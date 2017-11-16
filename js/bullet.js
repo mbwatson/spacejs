@@ -1,4 +1,3 @@
-
 class Bullet {
 	constructor(x, y, speed, angle) {
 		this.x = x;
@@ -41,8 +40,8 @@ class Bullets extends Array {
 	}
 
 	draw() {
-		for (let i = 0; i < this.length; i++) {
-			this[i].draw();
+		for (var bullet of this) {
+			bullet.draw();
 		}
 	}
 

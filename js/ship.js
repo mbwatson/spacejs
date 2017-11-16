@@ -75,7 +75,7 @@ class Ship {
 	thrust() {
 		this.ddx += this.thrustAcceleration * cos(this.angle);
 		this.ddy += this.thrustAcceleration * sin(this.angle);
-		this.exhaust.particles.push({
+		this.exhaust.push({
 			'x': this.x - 5*cos(this.angle),
 			'y': this.y - 5*sin(this.angle),
 			'dx': cos(this.angle),

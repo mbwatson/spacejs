@@ -1,24 +1,21 @@
-class Exhaust {
-	constructor() {
-		this.particles = [];
-	}
+class Exhaust extends Array {
 	update() {
-		for (let i = this.particles.length-1; i >= 0; i--) {
-			if (this.particles[i].alpha > 0) {
-				this.particles[i].x -= this.particles[i].dx + random();
-				this.particles[i].y -= this.particles[i].dy + random();
-				this.particles[i].alpha -= 20*random();
-				this.particles[i].r -= random();
+		for (let i = this.length-1; i >= 0; i--) {
+			if (this[i].alpha > 0) {
+				this[i].x -= this[i].dx + random();
+				this[i].y -= this[i].dy + random();
+				this[i].alpha -= 20*random();
+				this[i].r -= random();
 			} else {
-				this.particles.splice(i, 1);
+				this.splice(i, 1);
 			}
 		}
 	}
 	draw() {
 		noStroke();
-		for (let i = 0; i < this.particles.length; i++) {
-			fill(color(255, this.particles[i].alpha, 0, this.particles[i].alpha));
-			ellipse(this.particles[i].x, this.particles[i].y, this.particles[i].r, this.particles[i].r);
+		for (var particle of this) {
+			fill(color(255, particle.alpha, 0, particle.alpha));
+			ellipse(particle.x, particle.y, particle.r, particle.r);
 		}
 	}
 }
