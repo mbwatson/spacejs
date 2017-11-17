@@ -9,7 +9,7 @@ class Ship {
 		this.angle = -PI/2;
 		this.dangle = 0.075;
 		this.thrustAcceleration = 0.0010;
-		this.fireAcceleration = 0.0010;
+		this.fireAcceleration = 0.0009;
 		this.lastShot = 0;
 		this.shotDelay = 150; // in milliseconds
 		this.bullets = new Bullets();
