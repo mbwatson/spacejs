@@ -32,13 +32,7 @@ class Ship {
 			this.ddy = 0;
 		}
 		if (keyIsDown(32)) { // Spacebar
-			this.ddx += -this.fireAcceleration * cos(this.angle);
-			this.ddy += -this.fireAcceleration * sin(this.angle);
-			if (this.millisSinceLastShot() > this.shotDelay) {
-				let speed = sqrt(this.dx**2 + this.dy**2);
-				this.bullets.push(new Bullet(this.x, this.y, speed, this.angle));
-				this.lastShot = millis();
-			}
+			this.shoot();
 		}
 		this.dx += this.ddx;
 		this.dy += this.ddy;
@@ -80,6 +74,15 @@ class Ship {
 			'r': 10,
 			'alpha': 255
 		});
+	}
+	shoot() {
+		this.ddx += -this.fireAcceleration * cos(this.angle);
+		this.ddy += -this.fireAcceleration * sin(this.angle);
+		if (this.millisSinceLastShot() > this.shotDelay) {
+			let speed = sqrt(this.dx**2 + this.dy**2);
+			this.bullets.push(new Bullet(this.x + 12*cos(this.angle), this.y + 12*sin(this.angle), speed, this.angle));
+			this.lastShot = millis();
+		}
 	}
 }
 
