@@ -2,7 +2,7 @@ class Bullet {
 	constructor(x, y, speed, angle) {
 		this.x = x;
 		this.y = y;
-		this.speed = 10 + speed;
+		this.speed = 5 + speed;
 		this.dx = this.speed * cos(angle);
 		this.dy = this.speed * sin(angle);
 		this.alpha = 255;
