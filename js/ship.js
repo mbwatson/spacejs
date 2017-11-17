@@ -68,14 +68,7 @@ class Ship {
 	thrust() {
 		this.ddx += this.thrustAcceleration * cos(this.angle);
 		this.ddy += this.thrustAcceleration * sin(this.angle);
-		this.exhaust.push({
-			'x': this.x - 5*cos(this.angle),
-			'y': this.y - 5*sin(this.angle),
-			'dx': cos(this.angle),
-			'dy': sin(this.angle),
-			'r': 10,
-			'alpha': 255
-		});
+		this.exhaust.push(new Particle(this.x, this.y, this.angle));
 	}
 	shoot() {
 		this.ddx += -this.fireAcceleration * cos(this.angle);
