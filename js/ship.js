@@ -28,12 +28,12 @@ class Ship {
 		if (keyIsDown(32)) { // Spacebar
 			this.shoot();
 		}
-		if (keyIsDown(UP_ARROW)) {
-			this.thrust();
-		} else {
-			this.ddx = 0;
-			this.ddy = 0;
-		}
+		// if (keyIsDown(UP_ARROW)) {
+		// 	this.thrust();
+		// } else {
+		// 	this.ddx = 0;
+		// 	this.ddy = 0;
+		// }
 		this.dx += this.ddx;
 		this.dy += this.ddy;
 		this.x += this.dx + 0.5*this.ddx;
@@ -47,10 +47,10 @@ class Ship {
 		fill(255);
 		strokeWeight(1);
 		beginShape();
-		vertex(this.x + 20*cos(this.angle), this.y + 20*sin(this.angle));
-		vertex(this.x + 8*cos(this.angle - PI/2), this.y + 8*sin(this.angle - PI/2));
+		vertex(this.x + 18*cos(this.angle), this.y + 18*sin(this.angle));
+		vertex(this.x + 6*cos(this.angle - PI/2), this.y + 6*sin(this.angle - PI/2));
 		vertex(this.x + 3*cos(this.angle), this.y + 3*sin(this.angle));
-		vertex(this.x + 8*cos(this.angle + PI/2), this.y + 8*sin(this.angle + PI/2));
+		vertex(this.x + 6*cos(this.angle + PI/2), this.y + 6*sin(this.angle + PI/2));
 		endShape();
 		this.bullets.draw();
 		this.exhaust.draw();

@@ -15,6 +15,23 @@ class Space {
 			if (this.ship.bullets[i].offLeftEdge()) { this.ship.bullets[i] = this.surface.leftEdge(this.ship.bullets[i]); }
 			if (this.ship.bullets[i].offRightEdge()) { this.ship.bullets[i] = this.surface.rightEdge(this.ship.bullets[i]); }
 		}
+		if (mouseIsPressed) {
+			stroke(color(0,255,255));
+			line(mouseX, mouseY, this.ship.x, this.ship.y);
+			let distance = dist(mouseX, mouseY, this.ship.x, this.ship.y);
+			console.log(distance);
+			let destinationAngle = acos((mouseX - this.ship.x)/distance);
+			if (mouseY < this.ship.y) {
+				destinationAngle *= -1;
+			}
+			console.log(destinationAngle);
+			text(approx(destinationAngle,1), mouseX-10, mouseY-10);
+			this.ship.angle = destinationAngle;
+			this.ship.thrust();
+		} else {
+			this.ship.ddx = 0;
+			this.ship.ddy = 0;
+		}
 		this.ship.update();
 	}
 	draw() {

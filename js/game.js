@@ -61,8 +61,9 @@ H - Toggle HUD`, width/2 + 200, height/2 + 50);
 		textAlign(LEFT);
 		let shipInfo = `SHIP
 Position: (${approx(this.space.ship.x, 2)},${approx(this.space.ship.y, 2)})
-Velocity: (${approx(this.space.ship.dx, 2)},${approx(this.space.ship.dy, 2)})`;
-		text(shipInfo, 10, height - 40);
+Velocity: (${approx(this.space.ship.dx, 2)},${approx(this.space.ship.dy, 2)})
+Angle: ${approx(this.space.ship.angle, 2)}`;
+		text(shipInfo, 10, height - 55);
 		text(`BULLETS`, 10, 20);
 		if (this.space.ship.bullets.length > 0) {
 			for (let i = 0; i < this.space.ship.bullets.length; i++) {
