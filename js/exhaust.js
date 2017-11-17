@@ -2,8 +2,8 @@ class Exhaust extends Array {
 	update() {
 		for (let i = this.length-1; i >= 0; i--) {
 			if (this[i].alpha > 0) {
-				this[i].x -= this[i].dx + random();
-				this[i].y -= this[i].dy + random();
+				this[i].x -= this[i].dx + random(-1,1)/2;
+				this[i].y -= this[i].dy + random(-1,1)/2;
 				this[i].alpha -= 20*random();
 				this[i].r -= random();
 			} else {
