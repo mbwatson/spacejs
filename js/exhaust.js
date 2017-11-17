@@ -22,8 +22,8 @@ class Exhaust extends Array {
 
 class Particle {
 	constructor(x, y, angle) {
-		this.x = x - 5*cos(angle);
-		this.y = y - 5*sin(angle);
+		this.x = x - 2*cos(angle);
+		this.y = y - 2*sin(angle);
 		this.dx = cos(angle);
 		this.dy = sin(angle);
 		this.r = 10;
