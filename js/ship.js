@@ -46,9 +46,10 @@ class Ship {
 		fill(255);
 		strokeWeight(1);
 		beginShape();
-		vertex(this.x + 15*cos(this.angle), this.y + 15*sin(this.angle));
-		vertex(this.x + 5*cos(this.angle - PI/2), this.y + 5*sin(this.angle - PI/2));
-		vertex(this.x + 5*cos(this.angle + PI/2), this.y + 5*sin(this.angle + PI/2));
+		vertex(this.x + 18*cos(this.angle), this.y + 18*sin(this.angle));
+		vertex(this.x + 6*cos(this.angle - PI/2), this.y + 6*sin(this.angle - PI/2));
+		vertex(this.x + 3*cos(this.angle), this.y + 3*sin(this.angle));
+		vertex(this.x + 6*cos(this.angle + PI/2), this.y + 6*sin(this.angle + PI/2));
 		endShape(CLOSE);
 		this.bullets.draw();
 		this.exhaust.draw();
