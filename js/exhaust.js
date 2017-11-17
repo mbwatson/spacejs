@@ -19,3 +19,14 @@ class Exhaust extends Array {
 		}
 	}
 }
+
+class Particle {
+	constructor(x, y, angle) {
+		this.x =  x - 3*cos(angle);
+		this.y =  y - 3*sin(angle);
+		this.dx =  cos(angle);
+		this.dy =  sin(angle);
+		this.r =  10;
+		this.alpha =  255;
+	}
+}
