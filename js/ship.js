@@ -9,7 +9,7 @@ class Ship {
 		this.angle = -PI/2;
 		this.dangle = 0.075;
 		this.thrustAcceleration = 0.0010;
-		this.fireAcceleration = 0.0010;
+		this.fireAcceleration = 0.0009;
 		this.lastShot = 0;
 		this.shotDelay = 150; // in milliseconds
 		this.bullets = new Bullets();
@@ -25,14 +25,14 @@ class Ship {
 		if (keyIsDown(RIGHT_ARROW)) {
 			this.angle += this.dangle;
 		}
+		if (keyIsDown(32)) { // Spacebar
+			this.shoot();
+		}
 		if (keyIsDown(UP_ARROW)) {
 			this.thrust();
 		} else {
 			this.ddx = 0;
 			this.ddy = 0;
-		}
-		if (keyIsDown(32)) { // Spacebar
-			this.shoot();
 		}
 		this.dx += this.ddx;
 		this.dy += this.ddy;
@@ -40,16 +40,18 @@ class Ship {
 		this.y += this.dy + 0.5*this.ddy;
 		this.bullets.update();
 		this.exhaust.update();
+		this.angle %= 2*PI;
 	}
 	draw() {
 		stroke(255);
 		fill(255);
 		strokeWeight(1);
 		beginShape();
-		vertex(this.x + 15*cos(this.angle), this.y + 15*sin(this.angle));
-		vertex(this.x + 5*cos(this.angle - PI/2), this.y + 5*sin(this.angle - PI/2));
-		vertex(this.x + 5*cos(this.angle + PI/2), this.y + 5*sin(this.angle + PI/2));
-		endShape(CLOSE);
+		vertex(this.x + 20*cos(this.angle), this.y + 20*sin(this.angle));
+		vertex(this.x + 8*cos(this.angle - PI/2), this.y + 8*sin(this.angle - PI/2));
+		vertex(this.x + 3*cos(this.angle), this.y + 3*sin(this.angle));
+		vertex(this.x + 8*cos(this.angle + PI/2), this.y + 8*sin(this.angle + PI/2));
+		endShape();
 		this.bullets.draw();
 		this.exhaust.draw();
 	}
@@ -79,8 +81,7 @@ class Ship {
 		this.ddx += -this.fireAcceleration * cos(this.angle);
 		this.ddy += -this.fireAcceleration * sin(this.angle);
 		if (this.millisSinceLastShot() > this.shotDelay) {
-			let speed = sqrt(this.dx**2 + this.dy**2);
-			this.bullets.push(new Bullet(this.x + 12*cos(this.angle), this.y + 12*sin(this.angle), speed, this.angle));
+			this.bullets.push(new Bullet(this.x + 12*cos(this.angle), this.y + 12*sin(this.angle), this.speed(), this.angle));
 			this.lastShot = millis();
 		}
 	}
