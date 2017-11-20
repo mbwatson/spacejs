@@ -2,11 +2,19 @@ class Game {
 	constructor() {
 		this.space = '';
 		this.visibleHUD = true;
-		this.state = 0;
 		this.paused = false;
+		this.state = 0;
 		// 0 - welcome screen
 		// 1 - playing
 		// 2 - game over
+	}
+	draw() {
+		this.space.surface.decorate();
+		if (this.visibleHUD) { this.showHUD(); }
+		this.space.draw();
+	}
+	spawnEnemy() {
+		this.space.enemies.push(new Enemy(random(width),random(height), random(60)*PI/60));
 	}
 	pause() { this.paused = true; }
 	unPause() { this.paused = false; }
@@ -70,6 +78,15 @@ Velocity: (${approx(this.space.ship.dx, 2)},${approx(this.space.ship.dy, 2)})`;
 			}
 		} else {
 			text(`None`, 10, 30);
+		}
+		textAlign(RIGHT);
+		text(`ENEMIES`, width - 10, 20);
+		if (this.space.enemies.length > 0) {
+			for (let i = 0; i < this.space.enemies.length; i++) {
+				text(`${i+1}: (${approx(this.space.enemies[i].x, 2)},${approx(this.space.enemies[i].y, 2)})`, width - 10, 30+10*i);
+			}
+		} else {
+			text(`None`, width - 10, 30);
 		}
 		this.space.surface.draw(width-60, height-40, 60);
 	}

@@ -11,6 +11,7 @@ function setup() {
 	game = new Game();
 	game.space = new Space(0, 0, width, height);
 	game.space.ship = new Ship(width/2, height/2);
+	game.space.enemies = new Enemies();
 }
 
 function draw() {
@@ -20,10 +21,7 @@ function draw() {
 			game.showWelcomeScreen();
 			break;
 		case 1: // playing
-			// draw
-			game.space.surface.decorate();
-			if (game.visibleHUD) { game.showHUD(); }
-			game.space.ship.draw();
+			game.draw();
 			if (game.paused === true) {
 				game.showPauseScreen();
 			} else {
@@ -51,10 +49,12 @@ function keyPressed() {
 	  // game control
 		if (key == 'H') { game.visibleHUD = !game.visibleHUD; }
 		if (key == 'R') {  }
-		  // surface change
+	  // surface change
 		if (key == 'T') { game.space.surface = new Torus(0, 0, width, height); }
 		if (key == 'K') { game.space.surface = new KleinBottle(0, 0, width, height); }
 		if (key == 'P') { game.space.surface = new ProjectivePlane(0, 0, width, height); }
+		// spawn new enemy
+		if (key == 'E') { game.spawnEnemy(); }
 	}
 }
 
