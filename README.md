@@ -13,13 +13,17 @@ The direction in which this project will go has not been decided upon, so this w
 ### Ship
 
 Left and Right - Turn
+
 Up - Thrust
 
 ### Change Surfaces
 T - Torus
+
 K - Klein Bottle
+
 P - Projective Plane
 
 ### Global Controls
 ESC - Pause
+
 H - Toggle HUD
