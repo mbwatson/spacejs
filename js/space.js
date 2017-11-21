@@ -4,11 +4,11 @@ class Space {
 	}
 	update() {
 		// bullets
-		for (let i = 0; i < this.ship.bullets.length; i++) {
-			if (this.ship.bullets[i].offTopEdge()) { this.ship.bullets[i] = this.surface.topEdge(this.ship.bullets[i]); }
-			if (this.ship.bullets[i].offBottomEdge()) { this.ship.bullets[i] = this.surface.bottomEdge(this.ship.bullets[i]); }
-			if (this.ship.bullets[i].offLeftEdge()) { this.ship.bullets[i] = this.surface.leftEdge(this.ship.bullets[i]); }
-			if (this.ship.bullets[i].offRightEdge()) { this.ship.bullets[i] = this.surface.rightEdge(this.ship.bullets[i]); }
+		for (var bullet of this.ship.bullets) {
+			if (bullet.offTopEdge()) { bullet = this.surface.topEdge(bullet); }
+			if (bullet.offBottomEdge()) { bullet = this.surface.bottomEdge(bullet); }
+			if (bullet.offLeftEdge()) { bullet = this.surface.leftEdge(bullet); }
+			if (bullet.offRightEdge()) { bullet = this.surface.rightEdge(bullet); }
 		}
 		// ship
 		if (this.ship.offTopEdge()) { this.ship = this.surface.topEdge(this.ship); }
@@ -23,10 +23,20 @@ class Space {
 			if (enemy.offLeftEdge()) { enemy = this.surface.leftEdge(enemy); }
 			if (enemy.offRightEdge()) { enemy = this.surface.rightEdge(enemy); }
 		}
+		this.enemyHit();
 		this.enemies.update();
 	}
 	draw() {
 		this.ship.draw();
 		this.enemies.draw();
+	}
+	enemyHit() {
+		for (var enemy of this.enemies) {
+			for (var bullet of this.ship.bullets) {
+				if (dist(enemy.x, enemy.y, bullet.x, bullet.y) < enemy.r) {
+					console.log('HIT!');
+				}
+			}
+		}
 	}
 }
